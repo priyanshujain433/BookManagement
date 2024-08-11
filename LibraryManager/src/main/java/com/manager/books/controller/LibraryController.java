@@ -27,7 +27,7 @@ public class LibraryController {
 	@Autowired
 	private BookService bookService;
 
-	@PostMapping(path = "/api/books")
+	@PostMapping("/api/books")
 	public ResponseEntity registerBook(@RequestBody BookModel book) {
 		if (bookService.bookExists(book.getId())) {
 			return new ResponseEntity<>("Book with reference id:" + book.getId() + " already exists",
@@ -41,7 +41,7 @@ public class LibraryController {
 
 	}
 
-	@PutMapping(path = "/api/books/{id}")
+	@PutMapping("/api/books/{id}")
 	public ResponseEntity updateBook(@PathVariable("id") String id, @RequestBody BookModel book) {
 		if (!bookService.bookExists(id)) {
 			return new ResponseEntity<>("Book with reference id :" + id + " does not exists", HttpStatus.BAD_REQUEST);
@@ -53,7 +53,7 @@ public class LibraryController {
 		return new ResponseEntity<>("Invalid Input", HttpStatus.NOT_ACCEPTABLE);
 	}
 
-	@GetMapping(path = "/api/books/{id}")
+	@GetMapping("/api/books/{id}")
 	public ResponseEntity retrieveBook(@PathVariable("id") String id) {
 		if (StringUtils.isNotEmpty(id)) {
 			BookModel book = bookService.getABook(id);
@@ -65,7 +65,7 @@ public class LibraryController {
 		return new ResponseEntity<>("Book reference id can not be empty", HttpStatus.BAD_REQUEST);
 	}
 
-	@GetMapping(path = "/api/books")
+	@GetMapping("/api/books")
 	public ResponseEntity retrieveAllBooks(@RequestParam(name = "page", defaultValue = "0") int page,
 			@RequestParam(name = "size", defaultValue = "10") int size,
 			@RequestParam(name = "sortBy", defaultValue = "id") String sortBy) {
