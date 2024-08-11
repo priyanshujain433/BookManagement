@@ -1,0 +1,27 @@
+<configuration>
+
+    <!-- Define a pattern for the logging output -->
+    <property name="LOG_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+
+    <!-- Define an appender to print logs to the console -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Set the default logging level to INFO -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <!-- Enable DEBUG level logging for MongoDB driver -->
+    <logger name="org.mongodb.driver" level="DEBUG"/>
+
+    <!-- Enable DEBUG level logging for MongoTemplate operations -->
+    <logger name="org.springframework.data.mongodb.core.MongoTemplate" level="DEBUG"/>
+
+    <!-- Optionally, you can log Spring Data MongoDB repository actions -->
+    <logger name="org.springframework.data.mongodb.repository.query.MongoQueryMethod" level="DEBUG"/>
+
+</configuration>
